@@ -25,12 +25,12 @@ if st.session_state.round == 1:
     price = st.number_input("Enter seller offer ($M)", 0, 400, 275)
 
     if st.button("Submit Round 1"):
-    if 270 <= price <= 275:
-        st.success("Accepted: price compensates buyer for moving off taxable baseline")
-        st.session_state.p1 = price
-        st.session_state.history.append(f"Round 1: {price} → accepted")
-        st.session_state.round = 2
-        st.rerun()
+        if 270 <= price <= 275:
+            st.success("Accepted: price compensates buyer for moving off taxable baseline")
+            st.session_state.p1 = price
+            st.session_state.history.append(f"Round 1: {price} → accepted")
+            st.session_state.round = 2
+            st.rerun()
     else:
         st.session_state.history.append(f"Round 1: {price} → rejected")
         st.error("Rejected. Seller may make another offer. The game only ends if the parties stop negotiating.")
