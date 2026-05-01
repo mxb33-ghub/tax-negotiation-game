@@ -31,9 +31,9 @@ if st.session_state.round == 1:
             st.session_state.history.append(f"Round 1: {price} → accepted")
             st.session_state.round = 2
             st.rerun()
-    else:
-        st.session_state.history.append(f"Round 1: {price} → rejected")
-        st.error("Rejected. Seller may make another offer. The game only ends if the parties stop negotiating.")
+        else:
+            st.session_state.history.append(f"Round 1: {price} → rejected")
+            st.error("Rejected. Seller may make another offer. The game only ends if the parties stop negotiating.")
           
    
 # -------------------------
