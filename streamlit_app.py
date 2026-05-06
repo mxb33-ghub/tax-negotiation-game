@@ -37,7 +37,7 @@ if st.session_state.role is None:
             st.session_state.role = "buyer"
             st.rerun()
 
-st.stop()
+    st.stop()
 
 # -------------------------
 # ROUND 1
