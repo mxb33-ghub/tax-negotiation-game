@@ -43,14 +43,14 @@ if st.session_state.role is None:
 # ROUND 1
 # -------------------------
 if st.session_state.round == 1:
-    st.header("Round 1 — Moving Off the $300M Taxable Baseline")
+    st.header("Round 1 — Improve Tax Efficiency for the Seller - Moving Off the $300M Taxable Baseline")
 
-    st.write("In this round, the price should move off the $300M taxable baseline. Refer to the seller's materials for pricing guidance.")
+    st.write("In this round, the buyer would like to improve it's tax efficiency, recognizing this causes tx inefficeney for the buyer. An appropriste price adjustment msy satisfy both parties. Refer to the seller's materials for pricing guidance.")
     st.write("If the parties agree, the agreed price becomes P₁ and the game moves to Round 2.")
 
     if st.session_state.role == "seller":
         st.subheader("You are the Seller")
-        st.write("You act first. Make a seller offer to the computer buyer.")
+        st.write("You act first. Make a seller offer to the buyer. Remember they have their own views of the cost/benefit of the proposal.")
         price = st.number_input("Enter your seller offer ($M)", 0, 400, 275)
 
         if st.button("Submit Round 1 Offer"):
