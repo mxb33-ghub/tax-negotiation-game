@@ -43,22 +43,44 @@ st.stop()
 # ROUND 1
 # -------------------------
 if st.session_state.round == 1:
-    st.header("Round 1 — Seller acts first")
+    st.header("Round 1 — Moving Off the $300M Taxable Baseline")
 
-    price = st.number_input("Enter seller offer ($M)", 0, 400, 275)
+    st.write("Accepted price range for Round 1: $270M to $275M.")
+    st.write("If the parties agree, the agreed price becomes P₁ and the game moves to Round 2.")
 
-    if st.button("Submit Round 1"):
-        if 270 <= price <= 275:
-            st.success("Accepted: price compensates buyer for moving off taxable baseline")
-            st.session_state.p1 = price
-            st.session_state.history.append(f"Round 1: {price} → accepted")
-            st.session_state.round = 2
-            st.rerun()
-        else:
-            st.session_state.history.append(f"Round 1: {price} → rejected")
-            st.error("Rejected. Seller may make another offer. The game only ends if the parties stop negotiating.")
+    if st.session_state.role == "seller":
+        st.subheader("You are the Seller")
+        st.write("You act first. Make a seller offer to the computer buyer.")
+        price = st.number_input("Enter your seller offer ($M)", 0, 400, 275)
 
-  
+        if st.button("Submit Round 1 Offer"):
+            if 270 <= price <= 275:
+                st.success("Computer Buyer accepts. Round 1 succeeds.")
+                st.session_state.p1 = price
+                st.session_state.history.append(f"Round 1: Seller offered ${price}M → accepted")
+                st.session_state.round = 2
+                st.rerun()
+            else:
+                st.error("Computer Buyer rejects. Try another seller offer.")
+                st.session_state.history.append(f"Round 1: Seller offered ${price}M → rejected")
+
+    elif st.session_state.role == "buyer":
+        st.subheader("You are the Buyer")
+        st.write("The computer seller opens with a demand of $278M.")
+        st.info("Computer Seller offer: $278M")
+
+        price = st.number_input("Enter your buyer counteroffer ($M)", 0, 400, 272)
+
+        if st.button("Submit Round 1 Counteroffer"):
+            if 270 <= price <= 275:
+                st.success("Computer Seller accepts. Round 1 succeeds.")
+                st.session_state.p1 = price
+                st.session_state.history.append(f"Round 1: Buyer countered ${price}M → accepted")
+                st.session_state.round = 2
+                st.rerun()
+            else:
+                st.error("Computer Seller rejects. Try another buyer counteroffer.")
+                st.session_state.history.append(f"Round 1: Buyer countered ${price}M → rejected") 
    
 # -------------------------
 # ROUND 2
