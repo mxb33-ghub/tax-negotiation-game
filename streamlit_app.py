@@ -45,7 +45,7 @@ if st.session_state.role is None:
 if st.session_state.round == 1:
     st.header("Round 1 — Moving Off the $300M Taxable Baseline")
 
-    st.write("Accepted price range for Round 1: $270M to $275M.")
+    st.write("In this round, the price should move off the $300M taxable baseline. Refer to the seller's materials for pricing guidance.")
     st.write("If the parties agree, the agreed price becomes P₁ and the game moves to Round 2.")
 
     if st.session_state.role == "seller":
