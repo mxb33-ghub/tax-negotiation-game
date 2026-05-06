@@ -45,12 +45,12 @@ if st.session_state.role is None:
 if st.session_state.round == 1:
     st.header("Round 1 — Improve Tax Efficiency for the Seller - Moving Off the $300M Taxable Baseline")
 
-    st.write("In this round, the buyer would like to improve it's tax efficiency, recognizing this causes tx inefficeney for the buyer. An appropriste price adjustment msy satisfy both parties. Refer to the seller's materials for pricing guidance.")
+    st.write("In this round, the buyer would like to improve it's tax efficiency, recognizing this causes tax issues for the buyer. An appropriate price adjustment may satisfy both parties. The seller proposes changing the terms to an all stock tax free sale.  Refer to the case materials for pricing guidance.")
     st.write("If the parties agree, the agreed price becomes P₁ and the game moves to Round 2.")
 
     if st.session_state.role == "seller":
         st.subheader("You are the Seller")
-        st.write("You act first. Make a seller offer to the buyer. Remember they have their own views of the cost/benefit of the proposal.")
+        st.write("You act first. Make a revised all stock tax free purchase offer to the buyer. Adjust the starting offer of $300M to reflect the buyer's increased tax cost due to loss of basis step up. Remember they have their own views of the cost/benefit of the proposal.")
         price = st.number_input("Enter your seller offer ($M)", 0, 400, 275)
 
         if st.button("Submit Round 1 Offer"):
@@ -66,7 +66,7 @@ if st.session_state.round == 1:
 
     elif st.session_state.role == "buyer":
         st.subheader("You are the Buyer")
-        st.write("The computer seller opens with a demand of $278M.")
+        st.write("The computer seller wants to improve it's tax efficiency, but recognizes it will cost you the loss of tax basis step up that a taxable purchase provides. They offer aa reduced purchase price of $278M.")
         st.info("Computer Seller offer: $278M")
 
         price = st.number_input("Enter your buyer counteroffer ($M)", 0, 400, 272)
