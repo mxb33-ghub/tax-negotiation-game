@@ -66,7 +66,7 @@ if st.session_state.round == 1:
 
     elif st.session_state.role == "buyer":
         st.subheader("You are the Buyer")
-        st.write("The computer seller wants to improve it's tax efficiency versus a taxable sale as the baseline, but recognizes it will cost you the loss of tax basis step up that the taxable purchase provides. They offer aa reduced purchase price of $278M for a tax free all stock purchase.")
+        st.write("The computer seller wants to improve it's tax efficiency versus a taxable sale as the baseline. They offer a reduced purchase price of $278M for a tax free all stock purchase.")
         st.info("Computer Seller offer: $278M")
 
         price = st.number_input("Enter your buyer counteroffer ($M)", 0, 400, 272)
