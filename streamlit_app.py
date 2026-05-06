@@ -45,7 +45,7 @@ if st.session_state.role is None:
 if st.session_state.round == 1:
     st.header("Round 1 — Improve Tax Efficiency for the Seller - Moving Off the $300M Taxable Baseline")
 
-    st.write("In this round, the buyer would like to improve it's tax efficiency, recognizing this causes tax issues for the buyer. An appropriate price adjustment may satisfy both parties. The seller proposes changing the terms to an all stock tax free sale.  Refer to the case materials for pricing guidance.")
+    st.write("In this round, the seller would like to improve it's tax efficiency, recognizing this causes tax issues for the buyer. An appropriate price adjustment may satisfy both parties. The seller proposes changing the terms to an all stock tax free sale.  Refer to the case materials for pricing guidance.")
     st.write("If the parties agree, the agreed price becomes P₁ and the game moves to Round 2.")
 
     if st.session_state.role == "seller":
@@ -66,7 +66,7 @@ if st.session_state.round == 1:
 
     elif st.session_state.role == "buyer":
         st.subheader("You are the Buyer")
-        st.write("The computer seller wants to improve it's tax efficiency, but recognizes it will cost you the loss of tax basis step up that a taxable purchase provides. They offer aa reduced purchase price of $278M.")
+        st.write("The computer seller wants to improve it's tax efficiency versus a taxable sale as the baseline, but recognizes it will cost you the loss of tax basis step up that the taxable purchase provides. They offer aa reduced purchase price of $278M for a tax free all stock purchase.")
         st.info("Computer Seller offer: $278M")
 
         price = st.number_input("Enter your buyer counteroffer ($M)", 0, 400, 272)
