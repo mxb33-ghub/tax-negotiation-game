@@ -13,12 +13,32 @@ if "round" not in st.session_state:
     st.session_state.p2 = None
     st.session_state.history = []
     st.session_state.final = None
-
+    st.session_state.role = None
 st.write("Baseline: $300M taxable purchase")
 
 # -------------------------
-# ROUND 1
+# ROLE SELECTION
 # -------------------------
+if st.session_state.role is None:
+    st.header("Choose Your Role")
+
+    st.write("You will play directly against the computer.")
+    st.write("Choose whether you want to represent the Buyer or the Seller.")
+
+    col1, col2 = st.columns(2)
+
+    with col1:
+        if st.button("Play as Seller"):
+            st.session_state.role = "seller"
+            st.rerun()
+
+    with col2:
+        if st.button("Play as Buyer"):
+            st.session_state.role = "buyer"
+            st.rerun()
+
+st.stop()
+
 # -------------------------
 # ROUND 1
 # -------------------------
