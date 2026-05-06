@@ -82,27 +82,67 @@ if st.session_state.round == 1:
                 st.error("Computer Seller rejects. Try another buyer counteroffer.")
                 st.session_state.history.append(f"Round 1: Buyer countered ${price}M → rejected") 
    
+
 # -------------------------
 # ROUND 2
 # -------------------------
 elif st.session_state.round == 2:
-    st.header("Round 2 — Buyer acts first")
+    st.header("Round 2 — Buyer Price Increase")
 
-    st.write(f"Round 1 Price: ${st.session_state.p1}M")
+    p1 = st.session_state.p1
 
-    price = st.number_input("Enter buyer offer ($M)", 0, 400, st.session_state.p1 + 12)
+    st.write(f"Round 1 agreed price: ${p1}M")
+    st.write("In this round, the buyer may offer a higher price than Round 1.")
 
-    if st.button("Submit Round 2"):
-        if st.session_state.p1 + 10 <= price <= st.session_state.p1 + 15:
-            st.success("Accepted: seller compensated for partial tax tradeoff")
-            st.session_state.p2 = price
-            st.session_state.history.append(f"Round 2: {price} → accepted")
-        else:
-            st.warning("Rejected: revert to Round 1 price")
-            st.session_state.p2 = st.session_state.p1
-            st.session_state.history.append(f"Round 2: {price} → rejected")
+    if st.session_state.role == "buyer":
+        st.subheader("You are the Buyer")
+        st.write("You act first. Offer a higher price to improve the buyer's economics.")
 
-        st.session_state.round = 3
+        price = st.number_input("Enter your Round 2 buyer offer ($M)", 0, 400, int(p1 + 12))
+
+        if st.button("Submit Round 2 Offer"):
+            if p1 + 10 <= price <= p1 + 15:
+                st.success("Computer Seller accepts. Round 2 succeeds.")
+                st.session_state.p2 = price
+                st.session_state.history.append(f"Round 2: Buyer offered ${price}M → accepted")
+                st.session_state.round = 3
+                st.rerun()
+            else:
+                st.error("Computer Seller rejects. Try another Round 2 offer.")
+                st.session_state.history.append(f"Round 2: Buyer offered ${price}M → rejected")
+
+        if st.button("Skip Round 2 — proceed without change"):
+            st.session_state.p2 = p1
+            st.session_state.history.append(f"Round 2 skipped → price remains ${p1}M")
+            st.session_state.round = 3
+            st.rerun()
+
+    elif st.session_state.role == "seller":
+        st.subheader("You are the Seller")
+
+        computer_offer = p1 + 12
+
+        st.write("The computer buyer offers a higher price to improve its economics.")
+        st.info(f"Computer Buyer offer: ${computer_offer}M")
+
+        col1, col2 = st.columns(2)
+
+        with col1:
+            if st.button("Accept Round 2 Offer"):
+                st.success("You accepted the computer buyer's Round 2 offer.")
+                st.session_state.p2 = computer_offer
+                st.session_state.history.append(f"Round 2: Computer Buyer offered ${computer_offer}M → accepted")
+                st.session_state.round = 3
+                st.rerun()
+
+        with col2:
+            if st.button("Reject Round 2 Offer"):
+                st.warning("You rejected Round 2. The price reverts to P₁ and the game proceeds to Round 3.")
+                st.session_state.p2 = p1
+                st.session_state.history.append(f"Round 2: Computer Buyer offered ${computer_offer}M → rejected; price remains ${p1}M")
+                st.session_state.round = 3
+                st.rerun()
+       
 
 # -------------------------
 # ROUND 3
