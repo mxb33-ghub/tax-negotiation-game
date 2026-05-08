@@ -45,10 +45,10 @@ if st.session_state.role is None:
 if st.session_state.round == 1:
     st.header("Round 1 — Improve Tax Efficiency for the Seller - Moving Off the $300M Taxable Baseline")
 
-    st.write("In this round, the seller would like to improve it's tax efficiency, recognizing this causes tax issues for the buyer. An appropriate price adjustment may satisfy both parties. The seller proposes changing the terms to an all stock tax free sale.  Refer to the case materials for pricing guidance.")
-    st.write("If the parties agree, the agreed price becomes P₁ and the game moves to Round 2.")
+    st.write("In this round, you, the seller would like to improve your tax efficiency, recognizing this causes tax issues for the buyer. An appropriate price adjustment may satisfy both parties. The seller proposes changing the terms to an all stock tax free sale.  Refer to the case materials for pricing guidance.")
+    st.write("If the parties agree, the agreed price becomes P₁, the structure changes to a tax free stock purchase,  and the game moves to Round 2.")
 
-    if st.session_state.role == "seller":
+    if st.session_state.role == "seller"
         st.subheader("You are the Seller")
         st.write("You act first. Make a revised all stock tax free purchase offer to the buyer. Adjust the starting offer of $300M to reflect the buyer's increased tax cost due to loss of basis step up. Remember they have their own views of the cost/benefit of the proposal.")
         price = st.number_input("Enter your seller offer ($M)", 0, 400, 275)
@@ -66,7 +66,7 @@ if st.session_state.round == 1:
 
     elif st.session_state.role == "buyer":
         st.subheader("You are the Buyer")
-        st.write("The computer seller wants to improve it's tax efficiency versus a taxable sale as the baseline. They offer a reduced purchase price of $278M for a tax free all stock purchase.")
+        st.write("The computer seller wants to improve it's tax efficiency versus the taxable sale baseline. They offer a reduced purchase price of $278M for a tax free all stock purchase.")
         st.info("Computer Seller offer: $278M")
 
         price = st.number_input("Enter your buyer counteroffer ($M)", 0, 400, 272)
@@ -87,20 +87,17 @@ if st.session_state.round == 1:
 # ROUND 2
 # -------------------------
 elif st.session_state.round == 2:
-    st.header("Round 2 — Buyer Price Increase")
+    st.header("Round 2 — Seller requests cash boot in the new stock purchase")
 
     p1 = st.session_state.p1
 
     st.write(f"Round 1 agreed price: ${p1}M")
-    st.write("In this round, the buyer may offer a higher price than Round 1.")
+    st.write("In this round, the seller has approached the buyer requesting some boot in the deal. The buyer is amenable, but recognizes they can extract a lowered purchase price for accomodating the seller")
 
     if st.session_state.role == "buyer":
         st.subheader("You are the Buyer")
-        st.write("You act first. Offer a higher price to improve the buyer's economics.")
-
-        price = st.number_input("Enter your Round 2 buyer offer ($M)", 0, 400, int(p1 + 12))
-
-        if st.button("Submit Round 2 Offer"):
+        st.write("You act first. Ask for a lower price in exchange for boot.")
+        price = st.number_input("Enter your Round 2 buyer offer ($M)", 0, 400, int(p1 + 12))      if st.button("Submit Round 2 Offer"):
             if p1 + 10 <= price <= p1 + 15:
                 st.success("Computer Seller accepts. Round 2 succeeds.")
                 st.session_state.p2 = price
@@ -108,7 +105,7 @@ elif st.session_state.round == 2:
                 st.session_state.round = 3
                 st.rerun()
             else:
-                st.error("Computer Seller rejects. Try another Round 2 offer.")
+                st.error("Computer Seller rejects the lowered price. Try another Round 2 offer.")
                 st.session_state.history.append(f"Round 2: Buyer offered ${price}M → rejected")
 
         if st.button("Skip Round 2 — proceed without change"):
@@ -122,14 +119,14 @@ elif st.session_state.round == 2:
 
         computer_offer = p1 + 12
 
-        st.write("The computer buyer offers a higher price to improve its economics.")
+        st.write("The computer buyer requests a higher price in exchange for offering you boot in the deal.")
         st.info(f"Computer Buyer offer: ${computer_offer}M")
 
         col1, col2 = st.columns(2)
 
         with col1:
             if st.button("Accept Round 2 Offer"):
-                st.success("You accepted the computer buyer's Round 2 offer.")
+                st.success("You accepted the computer buyer's Round 2 lowered price.")
                 st.session_state.p2 = computer_offer
                 st.session_state.history.append(f"Round 2: Computer Buyer offered ${computer_offer}M → accepted")
                 st.session_state.round = 3
@@ -148,7 +145,7 @@ elif st.session_state.round == 2:
 # ROUND 3
 # -------------------------
 elif st.session_state.round == 3:
-    st.header("Round 3 — Buyer acts first")
+    st.header("Round 3 — Buyer requests a change in the structure to accomodate business needs. Buyer acts first")
 
     st.write(f"Current Price: ${st.session_state.p2}M")
 
