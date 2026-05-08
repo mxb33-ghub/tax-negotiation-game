@@ -97,7 +97,8 @@ elif st.session_state.round == 2:
     if st.session_state.role == "buyer":
         st.subheader("You are the Buyer")
         st.write("You act first. Ask for a lower price in exchange for boot.")
-        price = st.number_input("Enter your Round 2 buyer offer ($M)", 0, 400, int(p1 + 12))      if st.button("Submit Round 2 Offer"):
+        price = st.number_input("Enter your Round 2 buyer offer ($M)", 0, 400, int(p1 + 12))   
+            if st.button("Submit Round 2 Offer"):
             if p1 + 10 <= price <= p1 + 15:
                 st.success("Computer Seller accepts. Round 2 succeeds.")
                 st.session_state.p2 = price
