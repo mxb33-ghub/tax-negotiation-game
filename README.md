@@ -2,7 +2,7 @@ This is a business case/game designed to simulate the negotiations that take pla
 when purchasing a business. It is intended for students in a University business tax class, both undergradute
 and graduate.
 
-Participants can asume the role of either buyer or seller, and are playing "against" the computer. 
+Participants can assume the role of either buyer or seller, and are playing "against" the computer. 
 However, this is not a typical negotition game. Rather,  Master the art of collaborative negotiation by turning 
 your opponent into a partner. (For more information on this, see Negotiation Strategies taught by Dr. Daylian Cain.)
 
