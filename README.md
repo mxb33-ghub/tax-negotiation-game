@@ -13,6 +13,6 @@ account buyer and seller may have different tax attributes, and the parties must
 that works for both of them. 
 
 Once the parties have completed the negotiation, they enter into a final bonus round where they explain the tax 
-consequnces of the negotiated.
+consequnces of the negotiated transaction.
 
 All rights to this simulation are reserved by the author, Mark E. Barrus, adjunct professor, Case Western Reserve University
