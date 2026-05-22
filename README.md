@@ -8,11 +8,11 @@ your opponent into a partner. (For more information on this, see Negotiation Str
 
 The simulation takes the participant through three rounds of negotiations.
 The parties have agreed to a taxable asset purchase as a starting point. Both parties then try to improve on the 
-outcome ny negotiating changes to the deal. The parties negotiate by changing the purchase price, taking into
+outcome by negotiating changes to the deal. The parties negotiate by changing the purchase price, taking into
 account buyer and seller may have different tax attributes, and the parties must find a price 
 that works for both of them. 
 
 Once the parties have completed the negotiation, they enter into a final bonus round where they explain the tax 
-consequnces of the negotiated transaction.
+consequences of the negotiated transaction.
 
 All rights to this simulation are reserved by the author, Mark E. Barrus, adjunct professor, Case Western Reserve University
