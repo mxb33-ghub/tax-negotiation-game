@@ -45,7 +45,7 @@ if st.session_state.role is None:
 if st.session_state.round == 1:
     st.header("Round 1 — Improve Tax Efficiency for the Seller - Moving Off the $300M Taxable Baseline")
 
-    st.write("In this round you, the seller, would like to improve your tax efficiency, recognizing this causes tax issues for the buyer. An appropriate price reduction may satisfy both parties. The seller proposes changing the terms to an all stock tax free sale.  Refer to the case materials for pricing guidance.")
+    st.write("In this round the seller would like to improve it's tax efficiency, recognizing this change  causes tax issues for the buyer. An appropriate price reduction may satisfy both parties. The seller proposes changing the terms to an all stock tax free sale.  Refer to the case materials for pricing guidance.")
     st.write("If the parties agree, the agreed price becomes P₁, the structure changes to a tax free stock purchase,  and the game moves to Round 2.")
 
     if st.session_state.role == "seller":
