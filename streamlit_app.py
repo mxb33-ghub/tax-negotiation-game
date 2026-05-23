@@ -347,7 +347,7 @@ elif st.session_state.round == 99:
 
     st.subheader("Bonus Question")
     st.write("Congratulations! Starting from a base case of a $300M all cash purchases, you have negotiated mutually agreed changes that have benefited both parties tax and business needs.")
-    st.write("You will now answer a bonus question. Based on whichever round you successfully completed, identify the type of tax-free reorganization that best  fits the final deal (e.g., IRC section 368(a(1)B.) Explain why you chose that answer, remembering that several types of reorganizations could be correct depending on which round you completed. The bonus question answer will be discussed in class.")
+    st.write("You will now answer a bonus question. Based on whichever round you successfully completed, identify the type of tax-free reorganization that best  fits the final deal (e.g., IRC section 368(a)(1)(B).) Explain why you chose that answer, remembering that several types of reorganizations could be correct depending on which round you completed. The bonus question answer will be discussed in class.")
    
     answer = st.text_area("Your answer")
 
