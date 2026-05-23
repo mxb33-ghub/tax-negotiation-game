@@ -14,6 +14,7 @@ if "round" not in st.session_state:
     st.session_state.history = []
     st.session_state.final = None
     st.session_state.role = None
+    st.session_state.next_round = None
 st.write("Baseline: $300M taxable purchase")
 
 # -------------------------
@@ -38,6 +39,25 @@ if st.session_state.role is None:
             st.rerun()
 
     st.stop()
+
+# -------------------------
+# ROUND TRANSITION SCREEN
+# -------------------------
+if st.session_state.next_round is not None:
+
+    st.success("Congratulations — the parties reached agreement.")
+
+    st.write(f"The game will now proceed to Round {st.session_state.next_round}.")
+
+    if st.button("Continue"):
+
+        st.session_state.round = st.session_state.next_round
+        st.session_state.next_round = None
+        st.session_state.round_attempts = 0
+        st.rerun()
+
+    st.stop()
+
 
 # -------------------------
 # ROUND 1
@@ -70,7 +90,7 @@ if st.session_state.round == 1:
                 st.success("Computer Buyer accepts. Round 1 succeeds.")
                 st.session_state.p1 = price
                 st.session_state.history.append(f"Round 1: Seller offered ${price}M → accepted")
-                st.session_state.round = 2
+                st.session_state.next_round = 2
                 st.rerun()
                 
             else:
@@ -96,7 +116,7 @@ if st.session_state.round == 1:
                 st.success("Computer Seller accepts. Round 1 succeeds.")
                 st.session_state.p1 = price
                 st.session_state.history.append(f"Round 1: Buyer countered ${price}M → accepted")
-                st.session_state.round = 2
+                st.session_state.next_round = 2
                 st.rerun()
 
             else:
@@ -144,7 +164,7 @@ elif st.session_state.round == 2:
                 st.success("Computer Seller agrees to the price concession. Round 2 succeeds.")
                 st.session_state.p2 = price
                 st.session_state.history.append(f"Round 2: Buyer offered ${price}M → accepted")
-                st.session_state.round = 3
+                st.session_state.next_round = 3
                 st.rerun()
 
             else:
@@ -182,7 +202,7 @@ elif st.session_state.round == 2:
                 st.success("Computer Buyer accepts. Round 2 succeeds.")
                 st.session_state.p2 = price
                 st.session_state.history.append(f"Round 2: Seller countered ${price}M → accepted")
-                st.session_state.round = 3
+                st.session_state.next_round = 3
                 st.rerun()
   
             else:
