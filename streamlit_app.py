@@ -23,7 +23,7 @@ if st.session_state.role is None:
     st.header("Choose Your Role")
 
     st.write("You will play directly against the computer.")
-    st.write("Choose whether you want to represent the Buyer or the Seller.")
+    st.write("Choose whether you want to play as the Buyer or the Seller.")
 
     col1, col2 = st.columns(2)
 
@@ -45,7 +45,7 @@ if st.session_state.role is None:
 if st.session_state.round == 1:
     st.header("Round 1 — Improve Tax Efficiency for the Seller - Moving Off the $300M Taxable Baseline")
 
-    st.write("In this round, you, the seller would like to improve your tax efficiency, recognizing this causes tax issues for the buyer. An appropriate price adjustment may satisfy both parties. The seller proposes changing the terms to an all stock tax free sale.  Refer to the case materials for pricing guidance.")
+    st.write("In this round you, the seller, would like to improve your tax efficiency, recognizing this causes tax issues for the buyer. An appropriate price reduction may satisfy both parties. The seller proposes changing the terms to an all stock tax free sale.  Refer to the case materials for pricing guidance.")
     st.write("If the parties agree, the agreed price becomes P₁, the structure changes to a tax free stock purchase,  and the game moves to Round 2.")
 
     if st.session_state.role == "seller":
@@ -53,8 +53,13 @@ if st.session_state.round == 1:
         st.write("You act first. Make a revised all stock tax free purchase offer to the buyer. Adjust the starting offer of $300M to reflect the buyer's increased tax cost due to loss of basis step up. Remember they have their own views of the cost/benefit of the proposal.")
         st.write("You have determined how much the tax free deal is worth to you. You cannot offer to reduce the price less than $270M.")
 
-        price = st.number_input("Enter your seller offer ($M)", 0, 400, 275)
-
+        price = st.number_input(
+            "Enter your seller offer ($M)"
+            min_value=0,
+            max_value=400,
+            value=None,
+            placeholder="Enter offer here..."
+            
         if st.button("Submit Round 1 Offer"):
             if price < 270:
                 st.error("Invalid offer. As seller, you have determined you cannot offer to reduce the price below $270M.")
