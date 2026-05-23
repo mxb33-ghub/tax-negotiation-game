@@ -87,15 +87,21 @@ if st.session_state.round == 1:
         price = st.number_input("Enter your buyer counteroffer ($M)", 0, 400, 278)
 
         if st.button("Submit Round 1 Counteroffer"):
-            if 270 <= price <= 275:
+            
+            if price > 275:
+                st.error("Invalid counteroffer. As buyer, you cannot offer more than $275M.")
+                st.session_state.history.append(f"Round 1: Buyer countered ${price}M → invalid, above buyer maximum")
+
+            elif price >= 270:
                 st.success("Computer Seller accepts. Round 1 succeeds.")
                 st.session_state.p1 = price
                 st.session_state.history.append(f"Round 1: Buyer countered ${price}M → accepted")
                 st.session_state.round = 2
                 st.rerun()
-            else:
-                st.error("Computer Seller rejects. Try another buyer counteroffer.")
-                st.session_state.history.append(f"Round 1: Buyer countered ${price}M → rejected") 
+
+           else:
+              st.error("Computer Seller rejects. The price is too low for the seller.")
+              st.session_state.history.append(f"Round 1: Buyer countered ${price}M → rejected")    
    
 
 # -------------------------
