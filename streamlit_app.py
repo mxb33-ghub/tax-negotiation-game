@@ -172,23 +172,23 @@ elif st.session_state.round == 2:
 
         if st.button("Submit Round 2 Counteroffer"):
 
-        if price is None:
-            st.error("Please enter a counteroffer.")
+            if price is None:
+                st.error("Please enter a counteroffer.")
 
-        elif price < p1 + 10:
-            st.error(f"Invalid counteroffer. As seller, you should not accept less than ${p1 + 10}M.")
+            elif price < p1 + 10:
+                st.error(f"Invalid counteroffer. As seller, you should not accept less than ${p1 + 10}M.")
 
-        elif price <= p1 + 15:
-            st.success("Computer Buyer accepts. Round 2 succeeds.")
-            st.session_state.p2 = price
-            st.session_state.history.append(f"Round 2: Seller countered ${price}M → accepted")
-            st.session_state.round = 3
-            st.rerun()
-
-        else:
-            st.session_state.round_attempts += 1
-            st.error("Computer Buyer rejects. Your counteroffer is too high.")
-            st.session_state.history.append(f"Round 2: Seller countered ${price}M → rejected")
+            elif price <= p1 + 15:
+                st.success("Computer Buyer accepts. Round 2 succeeds.")
+                st.session_state.p2 = price
+                st.session_state.history.append(f"Round 2: Seller countered ${price}M → accepted")
+                st.session_state.round = 3
+                st.rerun()
+  
+            else:
+                st.session_state.round_attempts += 1
+                st.error("Computer Buyer rejects. Your counteroffer is too high.")
+                st.session_state.history.append(f"Round 2: Seller countered ${price}M → rejected")
 
             if st.session_state.round_attempts >= 3:
                 st.session_state.final = p1
