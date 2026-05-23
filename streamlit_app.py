@@ -346,9 +346,9 @@ elif st.session_state.round == 3:
                    st.session_state.round = 99
                    st.rerun()
 
-               else:     
-                st.error("Computer Buyer rejects. Your counteroffer is too high.")
-                st.write(f"Offers remaining: {3 - st.session_state.round_attempts}")
+                else:     
+                    st.error("Computer Buyer rejects. Your counteroffer is too high.")
+                    st.write(f"Offers remaining: {3 - st.session_state.round_attempts}")
 # -------------------------
 # FINAL SCREEN
 # -------------------------
