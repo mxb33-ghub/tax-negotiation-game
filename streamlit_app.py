@@ -51,25 +51,33 @@ if st.session_state.round == 1:
     if st.session_state.role == "seller":
         st.subheader("You are the Seller")
         st.write("You act first. Make a revised all stock tax free purchase offer to the buyer. Adjust the starting offer of $300M to reflect the buyer's increased tax cost due to loss of basis step up. Remember they have their own views of the cost/benefit of the proposal.")
+        st.write("You have determined how much the tax free deal is worth to you. You cannot offer to reduce the price less than $270M.")
+
         price = st.number_input("Enter your seller offer ($M)", 0, 400, 275)
 
         if st.button("Submit Round 1 Offer"):
-            if 270 <= price <= 275:
+            if price < 270:
+            st.error("Invalid offer. As seller, you have determined you cannot offer to reduce the price below $270M.")
+            st.session_state.history.append(f"Round 1: Seller offered ${price}M → invalid, below seller minimum")
+            
+            elif price <= 275:
                 st.success("Computer Buyer accepts. Round 1 succeeds.")
                 st.session_state.p1 = price
                 st.session_state.history.append(f"Round 1: Seller offered ${price}M → accepted")
                 st.session_state.round = 2
                 st.rerun()
+                
             else:
-                st.error("Computer Buyer rejects. Try another seller offer.")
+                st.error("Computer Buyer rejects. Your offer is still too high for the buyer.")
                 st.session_state.history.append(f"Round 1: Seller offered ${price}M → rejected")
 
     elif st.session_state.role == "buyer":
         st.subheader("You are the Buyer")
-        st.write("The computer seller wants to improve it's tax efficiency versus the taxable sale baseline. They offer a reduced purchase price of $278M for a tax free all stock purchase.")
+        st.write("The computer seller wants to improve it's tax efficiency versus the taxable sale baseline. They offer to reduce purchase price to $278M in exchange for a tax free all stock purchase.")
+        st.write("You have determined you cannot pay more than $275M if the deal is changed to tax free because of the loss of tax benefits to you.")
         st.info("Computer Seller offer: $278M")
 
-        price = st.number_input("Enter your buyer counteroffer ($M)", 0, 400, 272)
+        price = st.number_input("Enter your buyer counteroffer ($M)", 0, 400, 278)
 
         if st.button("Submit Round 1 Counteroffer"):
             if 270 <= price <= 275:
