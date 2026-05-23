@@ -99,9 +99,9 @@ if st.session_state.round == 1:
                 st.session_state.round = 2
                 st.rerun()
 
-           else:
-              st.error("Computer Seller rejects. The price is too low for the seller.")
-              st.session_state.history.append(f"Round 1: Buyer countered ${price}M → rejected")    
+            else:
+               st.error("Computer Seller rejects. The price is too low for the seller.")
+               st.session_state.history.append(f"Round 1: Buyer countered ${price}M → rejected")    
    
 
 # -------------------------
