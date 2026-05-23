@@ -104,7 +104,13 @@ if st.session_state.round == 1:
         st.write("You would prefer to pay the lowest price you think the seller would accept.")
         st.info("Computer Seller offer: $278M")
 
-        price = st.number_input("Enter your buyer counteroffer ($M)", 0, 400, 278)
+       price = st.number_input(
+           "Enter your buyer counteroffer ($M)",
+           min_value=0,
+           max_value=400,
+           value=None,
+           placeholder="Enter counteroffer here..."
+       ) 
 
         if st.button("Submit Round 1 Counteroffer"):
             
