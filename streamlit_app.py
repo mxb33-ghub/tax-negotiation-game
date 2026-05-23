@@ -39,7 +39,7 @@ if st.session_state.role is None:
             st.rerun()
 
     st.stop()
-
+                                                                                                                                                        
 # -------------------------
 # ROUND TRANSITION SCREEN
 # -------------------------
@@ -223,27 +223,92 @@ elif st.session_state.round == 2:
                 st.rerun()
             else:
                 st.write(f"Counteroffers remaining: {3 - st.session_state.round_attempts}")
+
 # -------------------------
 # ROUND 3
 # -------------------------
+
 elif st.session_state.round == 3:
-    st.header("Round 3 — Buyer requests a change in the structure to accomodate business needs. Buyer acts first")
+    st.header("Round 3 — Buyer requests a business structure accommodation")
 
-    st.write(f"Current Price: ${st.session_state.p2}M")
+    p2 = st.session_state.p2
 
-    price = st.number_input("Enter buyer final offer ($M)", 0, 400, st.session_state.p2 + 5)
+    st.write(f"Current Price: ${p2}M")
+    st.write("In this round, the buyer seeks a structure that reduces execution risk and preserves business continuity. Specifically, the buyer is concerned about a structure tht will ensure acquired licenses stay intact inside of the current legal entity.")
+    st.write("If the parties do not agree, the game ends using the last successful price.")
 
-    if st.button("Submit Round 3"):
-        if st.session_state.p2 + 4 <= price <= st.session_state.p2 + 7:
-            st.success("Accepted: seller compensated for added complexity")
-            st.session_state.final = price
-            st.session_state.history.append(f"Round 3: {price} → accepted")
-        else:
-            st.warning("Rejected: price remains unchanged")
-            st.session_state.final = st.session_state.p2
-            st.session_state.history.append(f"Round 3: {price} → rejected")
+    if st.session_state.role == "buyer":
+        st.subheader("You are the Buyer")
+        st.write("You act first. Offer a modest price increase to compensate the seller for added complexity.")
 
-        st.session_state.round = 99
+        price = st.number_input(
+            "Enter your Round 3 buyer offer ($M)",
+            min_value=0,
+            max_value=400,
+            value=None,
+            placeholder="Enter final offer here..."
+        )
+
+        if st.button("Submit Round 3 Offer"):
+
+            if price is None:
+                st.error("Please enter an offer.")
+
+            elif price > p2 + 7:
+                st.error(f"Invalid offer. As buyer, you cannot offer more than ${p2 + 7}M.")
+
+            elif price >= p2 + 4:
+                st.success("Computer Seller accepts. Final deal reached.")
+                st.session_state.final = price
+                st.session_state.history.append(f"Round 3: Buyer offered ${price}M → accepted")
+                st.session_state.round = 99
+                st.rerun()
+
+            else:
+                st.error("Computer Seller rejects. The offer is not high enough.")
+                st.session_state.final = p2
+                st.session_state.history.append(f"Round 3: Buyer offered ${price}M → rejected; final price remains ${p2}M")
+                st.session_state.round = 99
+                st.rerun()
+
+    elif st.session_state.role == "seller":
+        st.subheader("You are the Seller")
+
+        computer_offer = p2 + 3
+
+        st.write("The computer buyer asks for a business structure accommodation.")
+        st.write("You may counter with a price that compensates you for added complexity.")
+        st.info(f"Computer Buyer offer: ${computer_offer}M")
+
+        price = st.number_input(
+            "Enter your Round 3 seller counteroffer ($M)",
+            min_value=0,
+            max_value=400,
+            value=None,
+            placeholder="Enter counteroffer here..."
+        )
+
+        if st.button("Submit Round 3 Counteroffer"):
+
+            if price is None:
+                st.error("Please enter a counteroffer.")
+
+            elif price < p2 + 4:
+                st.error(f"Invalid counteroffer. As seller, you should not accept less than ${p2 + 4}M.")
+
+            elif price <= p2 + 7:
+                st.success("Computer Buyer accepts. Final deal reached.")
+                st.session_state.final = price
+                st.session_state.history.append(f"Round 3: Seller countered ${price}M → accepted")
+                st.session_state.round = 99
+                st.rerun()
+
+            else:
+                st.error("Computer Buyer rejects. Your counteroffer is too high.")
+                st.session_state.final = p2
+                st.session_state.history.append(f"Round 3: Seller countered ${price}M → rejected; final price remains ${p2}M")
+                st.session_state.round = 99
+                st.rerun()
 
 # -------------------------
 # FINAL SCREEN
