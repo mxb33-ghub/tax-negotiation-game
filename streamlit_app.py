@@ -154,49 +154,49 @@ elif st.session_state.round == 2:
                 st.session_state.round = 99
                 st.rerun()
 
-    elif st.session_state.role == "seller":
-        st.subheader("You are the Seller")
+      elif st.session_state.role == "seller":
+    st.subheader("You are the Seller")
 
-        computer_offer = p1 + 8
-        
-        st.write("The computer buyer opens with a Round 2 offer.")
-        st.info(f"Computer Buyer offer: ${computer_offer}M")
+    computer_offer = p1 + 8
 
-        price = st.number_input(
-            "Enter your seller Round 2 counteroffer ($M)",
-             min_value=0,
-             max_value=400,
-             value=None,
-             placeholder="Enter counteroffer here..."
-         )
+    st.write("The computer buyer opens with a Round 2 offer.")
+    st.info(f"Computer Buyer offer: ${computer_offer}M")
 
-         if st.button("Submit Round 2 Counteroffer"):
+    price = st.number_input(
+        "Enter your seller Round 2 counteroffer ($M)",
+        min_value=0,
+        max_value=400,
+        value=None,
+        placeholder="Enter counteroffer here..."
+    )
 
-             if price is None:
-                 st.error("Please enter a counteroffer.")
+    if st.button("Submit Round 2 Counteroffer"):
 
-             elif price < p1 + 10:
-                 st.error(f"Invalid counteroffer. As seller, you should not accept less than ${p1 + 10}M.")
+        if price is None:
+            st.error("Please enter a counteroffer.")
 
-             elif price <= p1 + 15:
-                 st.success("Computer Buyer accepts. Round 2 succeeds.")
-                 st.session_state.p2 = price
-                 st.session_state.history.append(f"Round 2: Seller countered ${price}M → accepted")
-                 st.session_state.round = 3
-                 st.rerun()
+        elif price < p1 + 10:
+            st.error(f"Invalid counteroffer. As seller, you should not accept less than ${p1 + 10}M.")
 
-    else:
-        st.session_state.round_attempts += 1
-        st.error("Computer Buyer rejects. Your counteroffer is too high.")
-        st.session_state.history.append(f"Round 2: Seller countered ${price}M → rejected")
-
-        if st.session_state.round_attempts >= 3:
-            st.session_state.final = p1
-            st.session_state.history.append(f"Round 2 ended after 3 rejected offers → final price remains ${p1}M")
-            st.session_state.round = 99
+        elif price <= p1 + 15:
+            st.success("Computer Buyer accepts. Round 2 succeeds.")
+            st.session_state.p2 = price
+            st.session_state.history.append(f"Round 2: Seller countered ${price}M → accepted")
+            st.session_state.round = 3
             st.rerun()
+
         else:
-            st.write(f"Counteroffers remaining: {3 - st.session_state.round_attempts}")   
+            st.session_state.round_attempts += 1
+            st.error("Computer Buyer rejects. Your counteroffer is too high.")
+            st.session_state.history.append(f"Round 2: Seller countered ${price}M → rejected")
+
+            if st.session_state.round_attempts >= 3:
+                st.session_state.final = p1
+                st.session_state.history.append(f"Round 2 ended after 3 rejected offers → final price remains ${p1}M")
+                st.session_state.round = 99
+                st.rerun()
+            else:
+                st.write(f"Counteroffers remaining: {3 - st.session_state.round_attempts}")
 # -------------------------
 # ROUND 3
 # -------------------------
