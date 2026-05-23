@@ -57,8 +57,8 @@ if st.session_state.round == 1:
 
         if st.button("Submit Round 1 Offer"):
             if price < 270:
-            st.error("Invalid offer. As seller, you have determined you cannot offer to reduce the price below $270M.")
-            st.session_state.history.append(f"Round 1: Seller offered ${price}M → invalid, below seller minimum")
+                st.error("Invalid offer. As seller, you have determined you cannot offer to reduce the price below $270M.")
+                st.session_state.history.append(f"Round 1: Seller offered ${price}M → invalid, below seller minimum")
             
             elif price <= 275:
                 st.success("Computer Buyer accepts. Round 1 succeeds.")
