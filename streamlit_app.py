@@ -72,7 +72,7 @@ if st.session_state.round == 1:
     if st.session_state.role == "seller":
         st.subheader("You are the Seller")
         st.write("You act first. Make a revised all stock tax free purchase offer to the buyer. Adjust the starting offer of $300M to reflect the buyer's increased tax cost due to loss of basis step up. Remember they have their own views of the cost/benefit of the proposal.")
-        st.write("You have determined how much the tax free deal is worth to you. You cannot offer to reduce the price less than $270M.")
+        st.write("You have determined how much the tax free deal is worth to you. You cannot offer to reduce the price less than $270M. You may make 3 counteroffers, if no agreement is reached the round ends and you proceed to a bonus question.")
 
         price = st.number_input(
             "Enter your seller offer ($M)",
@@ -206,7 +206,7 @@ elif st.session_state.round == 2:
 
         computer_offer = p1 + 8
 
-        st.write("The computer buyer opens with a Round 2 offer.")
+        st.write("The computer buyer opens with a Round 2 offer. They offer to include some boot in the deal, in exchange for a price increase.")
         st.info(f"Computer Buyer offer: ${computer_offer}M")
 
         price = st.number_input(
