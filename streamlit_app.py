@@ -90,12 +90,22 @@ if st.session_state.round == 1:
                 st.success("Computer Buyer accepts. Round 1 succeeds.")
                 st.session_state.p1 = price
                 st.session_state.history.append(f"Round 1: Seller offered ${price}M → accepted")
+                st.session_state.round_attempts = 0
                 st.session_state.next_round = 2
                 st.rerun()
                 
             else:
-                st.error("Computer Buyer rejects. Your offer is still too high for the buyer.")
+                st.session_state.round_attempts += 1
                 st.session_state.history.append(f"Round 1: Seller offered ${price}M → rejected")
+
+                if st.session_state.round_attempts >= 3:
+                    st.session_state.final = 300
+                    st.session_state.history.append("Round 1 ended after 3 rejected offers → default $300M taxable")
+                    st.session_state.round = 99
+                    st.rerun()
+                else:
+                    st.error("Computer Buyer rejects. Try another seller offer.")
+                    st.write(f"Offers remaining: {3 - st.session_state.round_attempts}")   
 
     elif st.session_state.role == "buyer":
         st.subheader("You are the Buyer")
@@ -122,12 +132,22 @@ if st.session_state.round == 1:
                 st.success("Computer Seller accepts. Round 1 succeeds.")
                 st.session_state.p1 = price
                 st.session_state.history.append(f"Round 1: Buyer countered ${price}M → accepted")
+                st.session_state.round_attempts = 0
                 st.session_state.next_round = 2
                 st.rerun()
 
             else:
-               st.error("Computer Seller rejects. The price is too low for the seller.")
-               st.session_state.history.append(f"Round 1: Buyer countered ${price}M → rejected")    
+                st.session_state.round_attempts += 1
+                st.session_state.history.append(f"Round 1: Buyer countered ${price}M → rejected")
+
+                if st.session_state.round_attempts >= 3:
+                    st.session_state.final = 300
+                    st.session_state.history.append("Round 1 ended after 3 rejected offers → default $300M taxable")
+                    st.session_state.round = 99
+                    st.rerun()
+                else:
+                    st.error("Computer Seller rejects. The price is too low for the seller.")
+                    st.write(f"Offers remaining: {3 - st.session_state.round_attempts}")    
    
 
 # -------------------------
@@ -325,8 +345,8 @@ elif st.session_state.round == 99:
         st.write(h)
 
     st.subheader("Bonus Question")
-    st.write("Congratulations. Starting from a base case of a $300M all cash purchases, you have negotiated mutually agreed changes that have benefited both parties tax and business needs.")
-    st.write("You will now answer a bonus question. Based on whichever round you successfully completed, identify the type of tax-free reorganization that best  fits the final deal (e.g., IRC section 368a1B.) Explain why you chose that answer, remembering that several types of reorganizations could be correct depending on which round you completed. The bonus question answer will be discussed in class.")
+    st.write("Congratulations! Starting from a base case of a $300M all cash purchases, you have negotiated mutually agreed changes that have benefited both parties tax and business needs.")
+    st.write("You will now answer a bonus question. Based on whichever round you successfully completed, identify the type of tax-free reorganization that best  fits the final deal (e.g., IRC section 368(a(1)B.) Explain why you chose that answer, remembering that several types of reorganizations could be correct depending on which round you completed. The bonus question answer will be discussed in class.")
    
     answer = st.text_area("Your answer")
 
