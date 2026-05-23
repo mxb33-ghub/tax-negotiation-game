@@ -54,7 +54,7 @@ if st.session_state.round == 1:
         st.write("You have determined how much the tax free deal is worth to you. You cannot offer to reduce the price less than $270M.")
 
         price = st.number_input(
-            "Enter your seller offer ($M)"
+            "Enter your seller offer ($M)",
             min_value=0,
             max_value=400,
             value=None,
