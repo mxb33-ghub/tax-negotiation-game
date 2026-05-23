@@ -81,6 +81,7 @@ if st.session_state.round == 1:
         st.subheader("You are the Buyer")
         st.write("The computer seller wants to improve it's tax efficiency versus the taxable sale baseline. They offer to reduce purchase price to $278M in exchange for a tax free all stock purchase.")
         st.write("You have determined you cannot pay more than $275M if the deal is changed to tax free because of the loss of tax benefits to you.")
+        st.write("You would prefer to pay the lowest price you think the seller would accept.")
         st.info("Computer Seller offer: $278M")
 
         price = st.number_input("Enter your buyer counteroffer ($M)", 0, 400, 278)
