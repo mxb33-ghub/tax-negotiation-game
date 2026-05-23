@@ -108,61 +108,93 @@ if st.session_state.round == 1:
 # ROUND 2
 # -------------------------
 elif st.session_state.round == 2:
-    st.header("Round 2 — Seller requests cash boot in the new stock purchase")
+    st.header("Round 2 — Seller requests cash boot in the new stock purchase, buyer requests additional price concession to provide.")
 
     p1 = st.session_state.p1
 
     st.write(f"Round 1 agreed price: ${p1}M")
-    st.write("In this round, the seller has approached the buyer requesting some boot in the deal. The buyer is amenable, but recognizes they can extract a lowered purchase price for accomodating the seller")
-
+    st.write("In this round, the seller has approached the buyer requesting some boot into the new all stock deal. The buyer is amenable, but recognizes they can extract a lowered purchase price for accomodating the seller")
+    st.write("Both parties want to preserve the tax free nature of the revised deal.")
+    st.write("If the parties cannot agree, the negotiation ends using the Round 1 price.")
+    
+   
     if st.session_state.role == "buyer":
         st.subheader("You are the Buyer")
-        st.write("You act first. Ask for a lower price in exchange for boot.")
-        price = st.number_input("Enter your Round 2 buyer offer ($M)", 0, 400, int(p1 + 12))   
+        st.write("You act first. You request a higher price in exchange for including boot.")
+        st.write(f"You have determined you cannot offer more than ${p1 + 15}M in Round 2.")
+
+        price = st.number_input(
+            "Enter your Round 2 buyer offer ($M)",
+            min_value=0,
+            max_value=400,          
+            value=None,
+            placeholder="Enter offer here..."
+        )
+
         if st.button("Submit Round 2 Offer"):
-            if p1 + 10 <= price <= p1 + 15:
-                st.success("Computer Seller accepts. Round 2 succeeds.")
+
+            if price is None:
+                st.error("Please enter an offer.")
+
+            elif price > p1 + 15:
+                st.error(f"Invalid offer. As buyer, you cannot offer more than ${p1 + 15}M.")
+                st.session_state.history.append(f"Round 2: Buyer offered ${price}M → invalid, above buyer maximum")
+
+            elif price >= p1 + 10:
+                st.success("Computer Seller agrees to the price concession. Round 2 succeeds.")
                 st.session_state.p2 = price
                 st.session_state.history.append(f"Round 2: Buyer offered ${price}M → accepted")
                 st.session_state.round = 3
                 st.rerun()
-            else:
-                st.error("Computer Seller rejects the lowered price. Try another Round 2 offer.")
-                st.session_state.history.append(f"Round 2: Buyer offered ${price}M → rejected")
 
-        if st.button("Skip Round 2 — proceed without change"):
-            st.session_state.p2 = p1
-            st.session_state.history.append(f"Round 2 skipped → price remains ${p1}M")
-            st.session_state.round = 3
-            st.rerun()
+            else:
+                st.error("Computer Seller rejects. The offer is not high enough.")
+                st.session_state.final = p1
+                st.session_state.history.append(f"Round 2: Buyer offered ${price}M → rejected; final price remains ${p1}M")
+                st.session_state.round = 99
+                st.rerun()
 
     elif st.session_state.role == "seller":
         st.subheader("You are the Seller")
 
-        computer_offer = p1 + 12
+    computer_offer = p1 + 8
+st.info(f"Computer Buyer offer: ${computer_offer}M")
 
-        st.write("The computer buyer requests a higher price in exchange for offering you boot in the deal.")
-        st.info(f"Computer Buyer offer: ${computer_offer}M")
+price = st.number_input(
+    "Enter your seller Round 2 counteroffer ($M)",
+    min_value=0,
+    max_value=400,
+    value=None,
+    placeholder="Enter counteroffer here..."
+)
 
-        col1, col2 = st.columns(2)
+if st.button("Submit Round 2 Counteroffer"):
 
-        with col1:
-            if st.button("Accept Round 2 Offer"):
-                st.success("You accepted the computer buyer's Round 2 lowered price.")
-                st.session_state.p2 = computer_offer
-                st.session_state.history.append(f"Round 2: Computer Buyer offered ${computer_offer}M → accepted")
-                st.session_state.round = 3
-                st.rerun()
+    if price is None:
+        st.error("Please enter a counteroffer.")
 
-        with col2:
-            if st.button("Reject Round 2 Offer"):
-                st.warning("You rejected Round 2. The price reverts to P₁ and the game proceeds to Round 3.")
-                st.session_state.p2 = p1
-                st.session_state.history.append(f"Round 2: Computer Buyer offered ${computer_offer}M → rejected; price remains ${p1}M")
-                st.session_state.round = 3
-                st.rerun()
-       
+    elif price < p1 + 10:
+        st.error(f"Invalid counteroffer. As seller, you should not accept less than ${p1 + 10}M.")
 
+    elif price <= p1 + 15:
+        st.success("Computer Buyer accepts. Round 2 succeeds.")
+        st.session_state.p2 = price
+        st.session_state.history.append(f"Round 2: Seller countered ${price}M → accepted")
+        st.session_state.round = 3
+        st.rerun()
+
+    else:
+        st.session_state.round_attempts += 1
+        st.error("Computer Buyer rejects. Your counteroffer is too high.")
+        st.session_state.history.append(f"Round 2: Seller countered ${price}M → rejected")
+
+        if st.session_state.round_attempts >= 3:
+            st.session_state.final = p1
+            st.session_state.history.append(f"Round 2 ended after 3 rejected offers → final price remains ${p1}M")
+            st.session_state.round = 99
+            st.rerun()
+        else:
+            st.write(f"Counteroffers remaining: {3 - st.session_state.round_attempts}")   
 # -------------------------
 # ROUND 3
 # -------------------------
