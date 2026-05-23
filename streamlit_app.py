@@ -296,7 +296,7 @@ elif st.session_state.round == 3:
                     st.session_state.round = 99
                     st.rerun()
 
-               else:
+                else:
                     st.error("Computer Seller rejects. The offer is not high enough.")
                     st.write(f"Offers remaining: {3 - st.session_state.round_attempts}")
 
