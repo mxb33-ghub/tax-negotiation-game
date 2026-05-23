@@ -255,7 +255,7 @@ elif st.session_state.round == 3:
     p2 = st.session_state.p2
 
     st.write(f"Current Price: ${p2}M")
-    st.write("In this round, the buyer seeks a structure that reduces execution risk and preserves business continuity. Specifically, the buyer is concerned about a structure tht will ensure acquired licenses stay intact inside of the current legal entity.")
+    st.write("In this round, the buyer seeks a structure that reduces execution risk and preserves business continuity. Specifically, the buyer is concerned about a structure that will ensure acquired licenses stay intact inside of the current legal entity.")
     st.write("If the parties do not agree, the game ends using the last successful price.")
 
     if st.session_state.role == "buyer":
