@@ -15,6 +15,7 @@ if "round" not in st.session_state:
     st.session_state.final = None
     st.session_state.role = None
     st.session_state.next_round = None
+    st.session_state.round_attempts = 0
 st.write("Baseline: $300M taxable purchase")
 
 # -------------------------
