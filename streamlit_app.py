@@ -157,21 +157,23 @@ elif st.session_state.round == 2:
     elif st.session_state.role == "seller":
         st.subheader("You are the Seller")
 
-    computer_offer = p1 + 8
-st.info(f"Computer Buyer offer: ${computer_offer}M")
+        computer_offer = p1 + 8
+        
+        st.write("The computer buyer opens with a Round 2 offer.")
+        st.info(f"Computer Buyer offer: ${computer_offer}M")
 
-price = st.number_input(
-    "Enter your seller Round 2 counteroffer ($M)",
-    min_value=0,
-    max_value=400,
-    value=None,
-    placeholder="Enter counteroffer here..."
-)
+        price = st.number_input(
+            "Enter your seller Round 2 counteroffer ($M)",
+             min_value=0,
+             max_value=400,
+             value=None,
+             placeholder="Enter counteroffer here..."
+         )
 
-if st.button("Submit Round 2 Counteroffer"):
+         if st.button("Submit Round 2 Counteroffer"):
 
-    if price is None:
-        st.error("Please enter a counteroffer.")
+         if price is None:
+             st.error("Please enter a counteroffer.")
 
     elif price < p1 + 10:
         st.error(f"Invalid counteroffer. As seller, you should not accept less than ${p1 + 10}M.")
