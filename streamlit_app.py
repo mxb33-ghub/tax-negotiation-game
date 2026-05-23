@@ -59,7 +59,8 @@ if st.session_state.round == 1:
             max_value=400,
             value=None,
             placeholder="Enter offer here..."
-            
+        )
+        
         if st.button("Submit Round 1 Offer"):
             if price < 270:
                 st.error("Invalid offer. As seller, you have determined you cannot offer to reduce the price below $270M.")
