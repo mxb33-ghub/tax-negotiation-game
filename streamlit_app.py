@@ -339,7 +339,7 @@ elif st.session_state.round == 3:
                 st.session_state.history.append(f"Round 3: Seller countered ${price}M → rejected")
 
 
-               if st.session_state.round_attempts >= 3: 
+                if st.session_state.round_attempts >= 3: 
                    st.error("Computer Buyer rejects. Round 3 ends after 3 rejected counteroffers.")
                    st.session_state.final = p2
                    st.session_state.history.append(f"Round 3 ended after 3 rejected offers → final price remains ${p2}M")
