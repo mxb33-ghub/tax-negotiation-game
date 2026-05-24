@@ -8,6 +8,7 @@ st.title("Tax Negotiation Game")
 # Initialize state
 # -------------------------
 if "round" not in st.session_state:
+    st. session_state.started = False
     st.session_state.round = 1
     st.session_state.p1 = None
     st.session_state.p2 = None
@@ -17,6 +18,27 @@ if "round" not in st.session_state:
     st.session_state.next_round = None
     st.session_state.round_attempts = 0
 st.write("Baseline: $300M taxable purchase")
+
+# -------------------------
+# START SCREEN
+# -------------------------
+if not st.session_state.started:
+    st.header("Welcome to the Tax Negotiation Game")
+
+    st.write("You will take the role of either the buyr or seller negotiating a corporate acquisition. You will play against the computer.")
+    st.write("You should read the prepared materials prior to plating. Unlike many simulations, there is not a 'winner or loser'. Rather, you work coopertively wioth the other party so both party's improve their position.
+    st.write("The baseline deal is a $300M taxable purchase.")
+    st.write("There are three rounds and a bonus question. Each round changes the economics of the deal, and all negotiation happens through purchase price.")
+    st.write("Your objective is to improve the deal for your side while still reaching agreement with the other party.")
+    st.write("If the parties fail to reach agreement  after three counteroffers, the rounds end using the last successful deal price, and the player moves to the bonus round.")
+    st.write("At the end, you will answer a bonus question identifying the eligible tax-free reorganization structure based on the structure of the last round you successfully completed.")
+
+    if st.button("Start Game"):
+        st.session_state.started = True
+        st.rerun()
+
+    st.stop()
+
 
 # -------------------------
 # ROLE SELECTION
