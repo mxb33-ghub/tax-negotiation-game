@@ -26,7 +26,7 @@ if not st.session_state.started:
     st.header("Welcome to the Tax Negotiation Game")
 
     st.write("You will take the role of either the buyr or seller negotiating a corporate acquisition. You will play against the computer.")
-    st.write("You should read the prepared materials prior to plating. Unlike many simulations, there is not a 'winner or loser'. Rather, you work coopertively wioth the other party so both party's improve their position.
+    st.write("You should read the prepared materials prior to plating. Unlike many simulations, there is not a 'winner or loser'. Rather, you work coopertively wioth the other party so both party's improve their position.")
     st.write("The baseline deal is a $300M taxable purchase.")
     st.write("There are three rounds and a bonus question. Each round changes the economics of the deal, and all negotiation happens through purchase price.")
     st.write("Your objective is to improve the deal for your side while still reaching agreement with the other party.")
