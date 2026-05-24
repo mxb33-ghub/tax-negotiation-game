@@ -25,18 +25,16 @@ st.write("Baseline: $300M taxable purchase")
 if not st.session_state.started:
     st.header("Welcome to the Tax Negotiation Game")
 
-    st.write("You will take the role of either the buyr or seller negotiating a corporate acquisition. You will play against the computer.")
-    st.write("You should read the prepared materials prior to plating. Unlike many simulations, there is not a 'winner or loser'. Rather, you work coopertively wioth the other party so both party's improve their position.")
-    st.write("The baseline deal is a $300M taxable purchase.")
+    st.write("You will take the role of either the buyer or seller negotiating a corporate acquisition. You will play against the computer.")
+    st.write("You should read the prepared materials prior to playing. Unlike many simulations, there is not a 'winner or loser'. Rather, you work cooperatively with the other party so both party's improve their position.")
     st.write("There are three rounds and a bonus question. Each round changes the economics of the deal, and all negotiation happens through purchase price.")
     st.write("Your objective is to improve the deal for your side while still reaching agreement with the other party.")
-    st.write("If the parties fail to reach agreement  after three counteroffers, the rounds end using the last successful deal price, and the player moves to the bonus round.")
-    st.write("At the end, you will answer a bonus question identifying the eligible tax-free reorganization structure based on the structure of the last round you successfully completed.")
+    st.write("If the parties fail to reach agreement  after three counteroffers, the round ends using the last successful deal price, and the player moves to the bonus round.")
+    st.write("The bonus question asks you to identify the best type of eligible tax-free reorganization based on the structure of the last round you successfully completed.")
 
     if st.button("Start Game"):
         st.session_state.started = True
         st.rerun()
-
     st.stop()
 
 
